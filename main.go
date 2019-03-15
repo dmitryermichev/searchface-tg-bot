@@ -22,6 +22,9 @@ import (
 // TelegramToken - token for telegram bot
 var telegramToken = flag.String("token", "", "telegram token")
 
+// searchFacesImageItem - тип ответа, которые возвращает searchface.
+// score - рейтинг изображения
+// url - url изображения
 type searchFacesImageItem struct {
 	score float64
 	url   string
@@ -75,6 +78,7 @@ func main() {
 	b.Start()
 }
 
+// createMessage - создание сообщения на основе ответа от searchface
 func createMessage(searchResult io.ReadCloser) (tb.Album, error) {
 	var album tb.Album
 
@@ -93,6 +97,7 @@ func createMessage(searchResult io.ReadCloser) (tb.Album, error) {
 	return album, nil
 }
 
+// parse - парсинг ответа от searchfaceы
 func parse(jsonReader io.ReadCloser) ([]searchFacesImageItem, error) {
 	defer jsonReader.Close()
 
